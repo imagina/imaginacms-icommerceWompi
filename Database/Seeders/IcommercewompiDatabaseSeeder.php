@@ -30,7 +30,7 @@ class IcommercewompiDatabaseSeeder extends Seeder
         $options['mode'] = "sandbox";
         $options['minimunAmount'] = 15000;
   
-        $titleTrans = 'icommercewompi::icommercewompis.single';
+        $titleTrans = 'Wompi';
         $descriptionTrans = 'icommercewompi::icommercewompis.description';
 
         $params = array(
@@ -59,7 +59,7 @@ class IcommercewompiDatabaseSeeder extends Seeder
     public function addTranslation($paymentMethod,$locale,$title,$description){
 
       \DB::table('icommerce__payment_method_translations')->insert([
-          'title' => trans($title,[],$locale),
+          'title' => $title,
           'description' => trans($description,[],$locale),
           'payment_method_id' => $paymentMethod->id,
           'locale' => $locale
