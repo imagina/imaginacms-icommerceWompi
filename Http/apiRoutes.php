@@ -9,11 +9,6 @@ $router->group(['prefix' => 'icommercewompi'], function (Router $router) {
         'uses' => 'IcommerceWompiApiController@init',
     ]);
 
-    $router->get('/confirmation', [
-        'as' => 'icommercewompi.api.wompi.confirmation',
-        'uses' => 'IcommerceWompiApiController@confirmation',
-    ]);
-
     $router->post('/confirmation', [
         'as' => 'icommercewompi.api.wompi.confirmation',
         'uses' => 'IcommerceWompiApiController@confirmation',

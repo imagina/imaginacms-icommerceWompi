@@ -12,7 +12,7 @@ if (!function_exists('icommercewompi_encriptUrl')) {
 
      function icommercewompi_encriptUrl($orderID,$transactionID){
 
-        $url = "{$orderID}-{$transactionID}-".time();
+        $url = "{$orderID}-{$transactionID}";
         $encrip = base64_encode($url);
 
         return  $encrip;
@@ -52,6 +52,29 @@ if (!function_exists('icommercewompi_getOrderRefCommerce')) {
         $reference = $order->id."-".$transaction->id."-".time();
 
         return $reference;
+    }
+
+}
+
+/**
+* Get Infor Reference From Commerce
+* @param $reference
+* @return array
+*/
+if (!function_exists('icommercewompi_getInforRefCommerce')) {
+
+    
+    function icommercewompi_getInforRefCommerce($reference){
+
+        $result = explode('-',$reference);
+
+        $infor['orderId'] = $result[0];
+        $infor['transactionId'] = $result[1];
+
+        \Log::info('Module Icommercewompi: Reference Order Id: '.$infor['orderId']);
+        \Log::info('Module Icommercewompi: Reference Transaction Id: '. $infor['transactionId']);
+           
+        return $infor;
     }
 
 }

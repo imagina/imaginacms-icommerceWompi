@@ -20,6 +20,7 @@ return [
         'activate' => 'Activate',
         'publicKey' => 'Public Key',
         'privateKey' => 'Private Key',
+        'eventSecretKey' => 'Event Secret Key',
         'mode' => 'Mode',
     ],
     'form' => [

@@ -73,6 +73,15 @@ return [
                 'label' => 'icommercewompi::icommercewompis.table.privateKey'
             ]
         ],
+        'eventSecretKey' => [
+          'value' => null,
+            'name' => 'eventSecretKey',
+            'isFakeField' => true,
+            'type' => 'input',
+            'props' => [
+                'label' => 'icommercewompi::icommercewompis.table.eventSecretKey'
+            ]
+        ],
         'mode' => [
             'value' => 'sandbox',
             'name' => 'mode',

@@ -119,78 +119,79 @@ class IcommerceWompiApiController extends BaseApiController
      */
     public function confirmation(Request $request){
 
+        \Log::info('Module Icommercewompi: Confirmation - INIT - '.time());
+        //\Log::info('Module Icommercewompi: Event: '.$request->event);
+        //\Log::info('Module Icommercewompi: Data: '.json_encode($request->data));
+        $response = ['msj' => "Proceso Valido"];
+
         try {
 
-            \Log::info('Module Icommercewompi: Confirmation - '.time());
+            if($request->event=="transaction.updated"){
 
+                $dataTransaction = $request->data['transaction'];
+                //\Log::info('Module Icommercewompi: Transaction: '.json_encode($dataTransaction))
 
-            $wompiTransaction = $request->data->transaction;
+                // Get order id and transaction id from request
+                $inforReference = icommercewompi_getInforRefCommerce($dataTransaction['reference']);
 
-            // Get IDS
-            $referenceSale = explode('-',$wompiTransaction->id);
-            $orderID = $referenceSale[0];
-            $transactionID = $referenceSale[1];
+                $order = $this->order->find($inforReference['orderId']);
+                \Log::info('Module Icommercewompi: Order Status Id: '.$order->status_id);
 
-            \Log::info('Module Icommercewompi: Confirmation - orderID '.$orderID);
+                // Status Order 'pending'
+                if($order->status_id==1){
+                    
+                    // Wompi Service
+                    $wompiService = app("Modules\Icommercewompi\Services\WompiService");
 
-             // Order
-            $order = $this->order->find($orderID);
+                    // Get Payment Method Configuration
+                    $paymentMethod = icommercewompi_getPaymentMethodConfiguration();
 
-            \Log::info('Module Icommercewompi: Confirmation - Order Status '.$order->status_id);
+                    // Default Status Order
+                    $newStatusOrder = 7; // Status Order Failed
 
-            // Status Order 'Proccesing'
-            /*
-            if($order->status_id==1){
-                \Log::info('Module Icommercewompi: Response - Actualizando orderID: '.$orderID);
+                    // Get States From Commerce
+                    $codTransactionState = "";
+                    $transactionState = $dataTransaction['status'];
 
-                // Default
-                $newstatusOrder = 7; // Status Order Failed
+                    // Get Signatures
+                    $signature = $wompiService->makeSignature($request,$paymentMethod);
+                    $x_signature = $request->signature['checksum'];
 
-                if($wompiTransaction->status=="APPROVED"){
-                    $newstatusOrder = 13; // Status Order Processed
-                }
-
-                if($wompiTransaction->status=="DECLINED"){
-                    $newstatusOrder = 5; // Status Order Denied
-                }
-                //Transacción anulada (sólo aplica pra transacciones con tarjeta)
-                if($wompiTransaction->status=="VOIDED"){
-                    $newstatusOrder = 12; // Status Order Voided
-                }
-
-                if($wompiTransaction->status=="ERROR"){
-                    $newstatusOrder = 7; // Status Order Failed
+                    // Check signatures
+                    if ($x_signature == $signature) {
+                      $newStatusOrder =  $wompiService->getStatusOrder($dataTransaction['status']);
+                    }else{
+                        $codTransactionState = "Error - Sign";
+                        \Log::info('Module Icommercewompi: **ERROR** en Firma');
+                    }
+                     
+                    // Update Transaction
+                    $transaction = $this->validateResponseApi(
+                        $this->transactionController->update($inforReference['transactionId'],new Request(
+                            ["attributes" => [
+                                'order_id' => $order->id,
+                                'payment_method_id' => $paymentMethod->id,
+                                'amount' => $order->total,
+                                'status' => $newStatusOrder,
+                                'external_status' => $transactionState,
+                                'external_code' => $codTransactionState
+                            ]
+                        ]))
+                    );
+                    
+                    // Update Order Process
+                    $orderUP = $this->validateResponseApi(
+                        $this->orderController->update($order->id,new Request(
+                          ["attributes" =>[
+                            'order_id' => $order->id,
+                            'status_id' => $newStatusOrder
+                          ]
+                        ]))
+                    );
+                    
                 }
 
             }
-            */
-
-             // Update Transaction
-            /*
-            $transaction = $this->validateResponseApi(
-                $this->transactionController->update($transactionID,new Request(
-                    ["attributes" => [
-                        'order_id' => $order->id,
-                        'payment_method_id' => $paymentMethod->id,
-                        'amount' => $order->total,
-                        'status' => $newstatusOrder,
-                        'external_status' => $external_status,
-                        'external_code' => $external_code
-                    ]
-                ]))
-            );
-
-            // Update Order Process
-            $orderUP = $this->validateResponseApi(
-                $this->orderController->update($order->id,new Request(
-                  ["attributes" =>[
-                    'order_id' => $order->id,
-                    'status_id' => $newstatusOrder
-                  ]
-                ]))
-            );
-            */
-            
 
             \Log::info('Module Icommercewompi: Confirmation - END');
 
@@ -203,7 +204,7 @@ class IcommerceWompiApiController extends BaseApiController
         }
 
 
-        return response('Recibido', 200);
+        return response()->json($response, $status ?? 200);
 
     }
 

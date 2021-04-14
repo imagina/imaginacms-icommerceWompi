@@ -27,6 +27,7 @@ class IcommercewompiDatabaseSeeder extends Seeder
         $options['mainimage'] = null;
         $options['publicKey'] = null;
         $options['privateKey'] = null;
+        $options['eventSecretKey'] = null;
         $options['mode'] = "sandbox";
         $options['minimunAmount'] = 15000;
   
