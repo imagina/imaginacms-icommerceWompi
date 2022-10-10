@@ -42,7 +42,7 @@ class IcommercewompiServiceProvider extends ServiceProvider
         $this->publishConfig('icommercewompi', 'config');
         $this->publishConfig('icommercewompi', 'crud-fields');
 
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+        //$this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
     }
 
     /**
