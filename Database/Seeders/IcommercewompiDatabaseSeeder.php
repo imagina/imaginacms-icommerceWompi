@@ -18,6 +18,8 @@ class IcommercewompiDatabaseSeeder extends Seeder
       
       Model::unguard();
   
+      $this->call(IcommercewompiModuleTableSeeder::class);
+      
       $name = config('asgard.icommercewompi.config.paymentName');
       $result = PaymentMethod::where('name',$name)->first();
 
