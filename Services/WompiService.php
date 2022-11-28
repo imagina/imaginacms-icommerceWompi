@@ -25,7 +25,7 @@ class WompiService
         $wompi->setUrlgate($urlWompi);
         $wompi->setPublicKey($paymentMethod->options->publicKey);
         $wompi->setReferenceCode(icommercewompi_getOrderRefCommerce($order,$transaction));
-        $wompi->setAmount($order->total);
+        $wompi->setAmount(round($order->total)); //No admite decimales
         $wompi->setCurrency($order->currency_code);
         $wompi->setRedirectUrl(Route("icommercewompi.response",$order->id));
 
