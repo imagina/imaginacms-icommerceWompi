@@ -32,6 +32,7 @@ class IcommercewompiDatabaseSeeder extends Seeder
         $options['eventSecretKey'] = null;
         $options['mode'] = "sandbox";
         $options['minimunAmount'] = 15000;
+        $options['showInCurrencies'] = ["COP"];
   
         $titleTrans = 'Wompi';
         $descriptionTrans = 'icommercewompi::icommercewompis.description';
