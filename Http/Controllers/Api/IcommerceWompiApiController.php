@@ -49,6 +49,34 @@ class IcommerceWompiApiController extends BaseApiController
     }
 
     /**
+    * Init Calculations
+    * @param Requests request
+    * @return mixed
+    */
+    public function calculations(Request $request)
+    {
+      
+        try {
+            
+            // Configuration
+            $paymentName = config('asgard.icommercewompi.config.paymentName');
+            $attribute = array('name' => $paymentName);
+            $paymentMethod = $this->paymentMethod->findByAttributes($attribute);
+            $response = $this->icommercewompi->calculate($request->all(), $paymentMethod->options);
+            
+        } catch (\Exception $e) {
+            //Message Error
+            $status = 500;
+            $response = [
+            'errors' => $e->getMessage()
+            ];
+        }
+        
+        return response()->json($response, $status ?? 200);
+    
+    }
+    
+    /**
      * Init data
      * @param Requests request
      * @param Requests orderId
