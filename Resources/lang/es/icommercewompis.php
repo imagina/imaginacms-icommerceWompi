@@ -22,6 +22,7 @@ return [
         'privateKey' => 'Private Key',
         'eventSecretKey' => 'Event Secret Key',
         'mode' => 'Mode',
+        'signatureIntegrityKey' => 'Signature Integrity Key'
     ],
     'form' => [
     ],

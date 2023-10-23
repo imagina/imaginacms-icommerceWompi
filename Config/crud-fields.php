@@ -82,6 +82,15 @@ return [
                 'label' => 'icommercewompi::icommercewompis.table.eventSecretKey'
             ]
         ],
+        'signatureIntegrityKey' => [
+          'value' => null,
+            'name' => 'signatureIntegrityKey',
+            'isFakeField' => true,
+            'type' => 'input',
+            'props' => [
+                'label' => 'icommercewompi::icommercewompis.table.signatureIntegrityKey'
+            ]
+        ],
         'showInCurrencies' => [
           'value' => ['COP'],
           'name' => 'showInCurrencies',

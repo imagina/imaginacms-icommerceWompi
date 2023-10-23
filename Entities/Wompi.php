@@ -9,10 +9,11 @@ class Wompi
 
 	  private $urlAction; 
   	private $publicKey;
-    private $currency;
-  	private $referenceCode;
-  	private $amount;
+    public $currency;
+  	public $referenceCode;
+  	public $amount;
   	private $redirectUrl;
+    private $signatureIntegrity;
   	
   	private $_htmlFormCode;
   	private $_htmlCode;
@@ -56,6 +57,10 @@ class Wompi
   	   $this->redirectUrl =$redirectUrl;
   }
 
+  public function setSignatureIntegrity($signature){
+    $this->signatureIntegrity = $signature;
+  }
+
   /**
   * FORM - Set Form Name
   */
@@ -81,6 +86,7 @@ class Wompi
     $this->_htmlFormCode.=$this->_addInput('currency',$this->currency);
     $this->_htmlFormCode.=$this->_addInput('amount-in-cents',$this->amount);
 		$this->_htmlFormCode.=$this->_addInput('reference',$this->referenceCode);
+    $this->_htmlFormCode.=$this->_addInput('signature:integrity',$this->signatureIntegrity);
     $this->_htmlFormCode.=$this->_addInput('redirect-url',$this->redirectUrl);
 
   }
