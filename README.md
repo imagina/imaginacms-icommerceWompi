@@ -21,6 +21,7 @@ php artisan module:seed Icommercewompi
 	- Public Key
 	- Private Key
 	- Event Secret Key
+	- Signature Integrity Key
 
 ## Configuration Wompi Panel
 
