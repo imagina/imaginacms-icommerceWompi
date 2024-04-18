@@ -26,7 +26,8 @@ class WompiService
         $wompi->setReferenceCode(icommercewompi_getOrderRefCommerce($order, $transaction));
         $wompi->setAmount(round($order->total)); //No admite decimales
         $wompi->setCurrency($order->currency_code);
-        $wompi->setRedirectUrl(Route('icommercewompi.response', $order->id));
+        $wompi->setSignatureIntegrity($this->makeSignatureIntegrity($wompi,$paymentMethod->options->signatureIntegrityKey));
+        $wompi->setRedirectUrl(Route("icommercewompi.response",$order->id));
 
         return $wompi;
     }
@@ -84,4 +85,17 @@ class WompiService
 
         return $newStatus;
     }
+
+    /**
+     * Make the Signature Integrity - Update 2023
+     * @param Wompi (Class with configurations)
+     * @param signInteKey (signatureIntegrityKey from DB)
+     * @return signature
+     */
+    public function makeSignatureIntegrity($wompi,$signInteKey)
+    {
+        $signature = hash ("sha256", $wompi->referenceCode."".$wompi->amount."".$wompi->currency."".$signInteKey);
+        return $signature;
+    }
+
 }

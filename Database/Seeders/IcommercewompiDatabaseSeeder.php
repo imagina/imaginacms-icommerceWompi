@@ -20,18 +20,20 @@ class IcommercewompiDatabaseSeeder extends Seeder
         $name = config('asgard.icommercewompi.config.paymentName');
         $result = PaymentMethod::where('name', $name)->first();
 
-        if (! $result) {
-            $options['init'] = "Modules\Icommercewompi\Http\Controllers\Api\IcommerceWompiApiController";
-            $options['mainimage'] = null;
-            $options['publicKey'] = null;
-            $options['privateKey'] = null;
-            $options['eventSecretKey'] = null;
-            $options['mode'] = 'sandbox';
-            $options['minimunAmount'] = 15000;
-            $options['showInCurrencies'] = ['COP'];
+      if(!$result){
 
-            $titleTrans = 'Wompi';
-            $descriptionTrans = 'icommercewompi::icommercewompis.description';
+        $options['init'] = "Modules\Icommercewompi\Http\Controllers\Api\IcommerceWompiApiController";
+        $options['mainimage'] = null;
+        $options['publicKey'] = null;
+        $options['privateKey'] = null;
+        $options['eventSecretKey'] = null;
+        $options['signatureIntegrityKey'] = null;
+        $options['mode'] = "sandbox";
+        $options['minimunAmount'] = 15000;
+        $options['showInCurrencies'] = ["COP"];
+
+        $titleTrans = 'Wompi';
+        $descriptionTrans = 'icommercewompi::icommercewompis.description';
 
             $params = [
                 'name' => $name,

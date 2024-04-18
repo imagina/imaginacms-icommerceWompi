@@ -2,6 +2,8 @@
 
 namespace Modules\Icommercewompi\Entities;
 
+use Illuminate\Database\Eloquent\Model;
+
 class Wompi
 {
     private $urlAction;
@@ -65,6 +67,10 @@ class Wompi
       $this->redirectUrl = $redirectUrl;
   }
 
+  public function setSignatureIntegrity($signature){
+    $this->signatureIntegrity = $signature;
+  }
+
   /**
    * FORM - Set Form Name
    */
@@ -82,15 +88,17 @@ class Wompi
   }
 
   /**
-   * FORM - Add make fields
-   */
-  public function _makeFields()
-  {
-      $this->_htmlFormCode .= $this->_addInput('public-key', $this->publicKey);
-      $this->_htmlFormCode .= $this->_addInput('currency', $this->currency);
-      $this->_htmlFormCode .= $this->_addInput('amount-in-cents', $this->amount);
-      $this->_htmlFormCode .= $this->_addInput('reference', $this->referenceCode);
-      $this->_htmlFormCode .= $this->_addInput('redirect-url', $this->redirectUrl);
+  * FORM - Add make fields
+  */
+  public function _makeFields(){
+
+    $this->_htmlFormCode.=$this->_addInput('public-key',$this->publicKey);
+    $this->_htmlFormCode.=$this->_addInput('currency',$this->currency);
+    $this->_htmlFormCode.=$this->_addInput('amount-in-cents',$this->amount);
+		$this->_htmlFormCode.=$this->_addInput('reference',$this->referenceCode);
+    $this->_htmlFormCode.=$this->_addInput('signature:integrity',$this->signatureIntegrity);
+    $this->_htmlFormCode.=$this->_addInput('redirect-url',$this->redirectUrl);
+
   }
 
   /**
