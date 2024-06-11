@@ -20,12 +20,14 @@ return [
         'activate' => 'Activate',
         'publicKey' => 'Public Key',
         'privateKey' => 'Private Key',
+        'eventSecretKey' => 'Event Secret Key',
         'mode' => 'Mode',
+        'signatureIntegrityKey' => 'Signature Integrity Key'
     ],
     'form' => [
     ],
     'messages' => [
-        'minimum' => 'El TOTAL de la orden no cumple con el monto minimo'
+        'minimum' => 'El TOTAL de la orden no cumple con el monto minimo',
     ],
     'validation' => [
     ],
