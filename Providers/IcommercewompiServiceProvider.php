@@ -65,6 +65,18 @@ class IcommercewompiServiceProvider extends ServiceProvider
                 return new \Modules\Icommercewompi\Repositories\Cache\CacheIcommerceWompiDecorator($repository);
             }
         );
+        $this->app->bind(
+            'Modules\Icommercewompi\Repositories\PaymentSourcesRepository',
+            function () {
+                $repository = new \Modules\Icommercewompi\Repositories\Eloquent\EloquentPaymentSourcesRepository(new \Modules\Icommercewompi\Entities\PaymentSources());
+
+                if (! config('app.cache')) {
+                    return $repository;
+                }
+
+                return new \Modules\Icommercewompi\Repositories\Cache\CachePaymentSourcesDecorator($repository);
+            }
+        );
         // add bindings
     }
 }
