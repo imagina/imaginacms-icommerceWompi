@@ -22,13 +22,24 @@ return [
         'privateKey' => 'Private Key',
         'eventSecretKey' => 'Event Secret Key',
         'mode' => 'Mode',
-        'signatureIntegrityKey' => 'Signature Integrity Key'
+        'signatureIntegrityKey' => 'Signature Integrity Key',
+        'paymentAttemps' => 'Payment Attemps (Only to: WOMPI RECURRENCIA)'
     ],
     'form' => [
     ],
     'messages' => [
-        'minimum' => 'Total order minimum not allowed',
+        'minimum' => 'Total order minimum not allowed'
     ],
     'validation' => [
     ],
+    'methods' => [
+        'wompi' => [
+            'title' => 'Wompi',
+            'description' => 'Pago Inmediato'
+        ],
+        'wompiPaymentSources' => [
+            'title' => 'Wompi | Recurrencia',
+            'description' => 'Pago Periódico Automático'
+        ],
+    ]
 ];
