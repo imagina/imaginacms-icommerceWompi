@@ -12,4 +12,19 @@ Route::prefix('icommercewompi')->group(function (Router $router) {
         'as' => 'icommercewompi.api.wompi.confirmation',
         'uses' => 'IcommerceWompiApiController@confirmation',
     ]);
+
+    //======================================================== Payment Sources | Form Route Post
+
+    $router->post('/paymentsources/process-token/{eUrl}', [
+        'as' => 'icommercewompi.api.wompipaymentsources.processToken',
+        'uses' => 'IcommerceWompiApiController@processToken',
+    ]);
+
+    //======================================================== ELIMINAR ESTO LUEGO
+    
+    $router->post('/simulate-recurrence', [
+        'as' => 'icommercewompi.api.wompi.simulateRecurrence',
+        'uses' => 'IcommerceWompiApiController@simulateRecurrence',
+    ]);
+    
 });
