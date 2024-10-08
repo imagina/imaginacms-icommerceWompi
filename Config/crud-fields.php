@@ -135,6 +135,15 @@ return [
                 'label' => 'icommerce::common.minimum Amount',
             ],
         ],
+        'paymentAttemps' => [
+          'value' => 3,
+          'name' => 'paymentAttemps',
+          'isFakeField' => true,
+          'type' => 'input',
+          'props' => [
+                'label' => 'icommercewompi::icommercewompis.table.paymentAttemps'
+          ]
+        ]
 
     ],
 
