@@ -14,4 +14,13 @@ Route::prefix('icommercewompi')->group(function (Router $router) {
         'as' => 'icommercewompi.response',
         'uses' => 'PublicController@response',
     ]);
+
+     //========================================== Payment Sources | Payment
+
+    $router->get('/payment/{eUrl}/{ps}', [
+        'as' => 'icommercewompi.payment',
+        'uses' => 'PublicController@payment',
+        'middleware' => ['logged.in']
+    ]);
+    
 });

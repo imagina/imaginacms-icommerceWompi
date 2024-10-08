@@ -86,3 +86,25 @@ if (! function_exists('icommercewompi_getPaymentMethodConfiguration')) {
         return $paymentMethod;
     }
 }
+
+if (!function_exists('icommercewompi_encriptPS')) {
+    function icommercewompi_encriptPS($ps){
+
+       $url = time()."-{$ps}";
+       $encrip = base64_encode($url);
+
+       return  $encrip;
+
+   }
+}
+
+if (!function_exists('icommercewompi_decriptPS')) {
+    function icommercewompi_decriptPS($psC){
+
+        $decrip = base64_decode($psC);
+        $infor = explode('-',$decrip);
+        
+        return  $infor;
+
+   }
+}
