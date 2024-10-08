@@ -7,6 +7,15 @@ return [
         'edit' => 'icommercewompi::icommercewompis.edit resource',
         'destroy' => 'icommercewompi::icommercewompis.destroy resource',
     ],
-    // append
+    'icommercewompi.paymentsources' => [
+        'manage' => 'icommercewompi::paymentsources.manage resource',
+        'index' => 'icommercewompi::paymentsources.list resource',
+        'create' => 'icommercewompi::paymentsources.create resource',
+        'edit' => 'icommercewompi::paymentsources.edit resource',
+        'destroy' => 'icommercewompi::paymentsources.destroy resource',
+        'restore' => 'icommercewompi::paymentsources.restore resource',
+    ],
+// append
+
 
 ];
