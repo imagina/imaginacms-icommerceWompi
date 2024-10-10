@@ -156,7 +156,7 @@ class IcommerceWompiApiController extends BaseApiController
     public function confirmation(Request $request)
     {
 
-        \Log::info($this->log.'Confirmation|INIT:'.time());
+        \Log::info($this->log.'Confirmation||INIT:'.time());
         //\Log::info('Module Icommercewompi: Event: '.$request->event);
         //\Log::info('Module Icommercewompi: Data: '.json_encode($request->data));
         $response = ['msj' => "Proceso Valido"];
@@ -227,7 +227,7 @@ class IcommerceWompiApiController extends BaseApiController
 
             }
 
-            \Log::info($this->log.'Confirmation|END');
+            \Log::info($this->log.'Confirmation||END');
 
         } catch (\Exception $e) {
 

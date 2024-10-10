@@ -64,7 +64,7 @@ class PublicController extends BasePublicController
             $orderID = $infor[0];
             $transactionID = $infor[1];
            
-            //\Log::info('Module Icommercewompi: Index-ID:'.$orderID);
+            \Log::info($this->log.'|Index-ID:'.$orderID);
 
             // Validate get data
             $order = $this->order->find($orderID);
@@ -75,6 +75,9 @@ class PublicController extends BasePublicController
 
             
             if($paymentMethod->name=="icommercewompi"){
+
+                \Log::info($this->log.'|Index|Implementation: Webcheckout');
+
                 //Webcheckout Implementation
                 $wompiService = app("Modules\Icommercewompi\Services\WompiService");
                 $wompi = $wompiService->create($paymentMethod,$order,$transaction,$this->urls);
@@ -82,6 +85,8 @@ class PublicController extends BasePublicController
                 $wompi->executeRedirection();
 
             }else{
+
+                \Log::info($this->log.'|Index|Implementation: Payment Sources');
 
                 //Payment Sources Implementation
                 $publicKey = $paymentMethod->options->publicKey;
@@ -99,8 +104,9 @@ class PublicController extends BasePublicController
             
             
 
-
         } catch (\Exception $e) {
+
+            dd($e);
 
             \Log::error($this->log.'Index|Message: '.$e->getMessage());
             \Log::error($this->log.'Index: Code: '.$e->getCode());

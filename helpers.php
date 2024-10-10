@@ -64,8 +64,8 @@ if (! function_exists('icommercewompi_getInforRefCommerce')) {
         $infor['orderId'] = $result[0];
         $infor['transactionId'] = $result[1];
 
-        \Log::info('Module Icommercewompi: Reference Order Id: '.$infor['orderId']);
-        \Log::info('Module Icommercewompi: Reference Transaction Id: '.$infor['transactionId']);
+        \Log::info('Icommercewompi: Reference Order Id: '.$infor['orderId']);
+        \Log::info('Icommercewompi: Reference Transaction Id: '.$infor['transactionId']);
 
         return $infor;
     }
