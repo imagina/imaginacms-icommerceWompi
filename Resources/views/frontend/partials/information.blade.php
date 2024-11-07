@@ -46,7 +46,7 @@ jQuery(document).ready(function($) {
         if (typeof psSelected === 'undefined') {
             alert("{{trans('icommercewompi::icommercewompis.messages.select a payment method')}}")
         }else{
-            console.log("HOLAAAAAAAA")
+            
             $(this).prop("disabled", true);
             $(this).html(
                 `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> {{trans('icommercewompi::icommercewompis.messages.loading')}}`
