@@ -28,7 +28,13 @@ return [
     'form' => [
     ],
     'messages' => [
-        'minimum' => 'Total order minimum not allowed'
+        'minimum' => 'Total order minimum not allowed',
+        'not payment method added' => "You do not have an added payment method. Click on the 'Save your payment method' button'",
+        'click to add method' => 'Click on the button to start the process',
+        'make payment' => 'Pay',
+        'select a payment method' => 'Select a payment method',
+        'executing payment' => 'Executing payment, please wait a moment',
+        'loading' => 'Loading...'
     ],
     'validation' => [
     ],

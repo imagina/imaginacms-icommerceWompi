@@ -46,7 +46,9 @@ return [
         'not payment method added' => "No posees un medio de pago agregado. Haz click en el boton 'Guarda tu método de pago'",
         'click to add method' => 'Haz click en el botón para iniciar el proceso',
         'make payment' => 'Realizar pago',
-        'select a payment method' => 'Debes seleccionar un medio de pago'
+        'select a payment method' => 'Debes seleccionar un medio de pago',
+        'executing payment' => 'Ejecutando pago, espere un momento por favor',
+        'loading' => 'Cargando...'
     ],
     'validation' => [
     ],

@@ -26,9 +26,9 @@
             </li>
 
             <li class="list-group-item text-center">
-                <a id="btnPayWompi" class="btn btn-primary btn-sm text-uppercase" role="button" href="#" title="{{trans("icommercewompi::icommercewompis.messages.make payment")}}">
+                <button id="btnPayWompi" class="btn btn-primary btn-sm text-uppercase" title="{{trans("icommercewompi::icommercewompis.messages.make payment")}}">
                     {{trans("icommercewompi::icommercewompis.button.pay")}}
-                </a>
+                </button>
             </li>
         </ul>
 
@@ -46,6 +46,18 @@ jQuery(document).ready(function($) {
         if (typeof psSelected === 'undefined') {
             alert("{{trans('icommercewompi::icommercewompis.messages.select a payment method')}}")
         }else{
+            console.log("HOLAAAAAAAA")
+            $(this).prop("disabled", true);
+            $(this).html(
+                `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> {{trans('icommercewompi::icommercewompis.messages.loading')}}`
+            );
+
+            //Button to Add Methods
+            $('.add-methods form button').css("display", "none");
+
+            //Card Text in Add Methods
+            $('.add-methods .card-text').text("{{trans('icommercewompi::icommercewompis.messages.executing payment')}}");
+
             let finalUrl = "{{$redirectUrl}}"+"/"+psSelected
             window.location.href = finalUrl;
         }
