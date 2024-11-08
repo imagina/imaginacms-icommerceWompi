@@ -238,7 +238,7 @@ class WompiService
     }
 
     /**
-     * 
+     * Check if exist this Payment Card or Other | User for WompiApiController Validation when process the Token
      */
     public function checkUserPaymentSourcesExists($newPaymentSources)
     {
@@ -271,6 +271,7 @@ class WompiService
             }
         }
 
+        // Validation to not repeat PS
         if(!is_null($psToDelete)){
             $psToDelete->delete();
         }
