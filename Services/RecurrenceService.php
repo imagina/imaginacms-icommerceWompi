@@ -50,7 +50,7 @@ class RecurrenceService
         $response = ['status' => 1 ];
 
         //Get Payment Sources
-        $params = ["filter" => ["field" => "user_id","default" => 1,"status" => 1] ];
+        $params = ["filter" => ["field" => "user_id","default" => 1] ];
         $paymentSource = $this->paymentSources->getItem($order->customer_id, json_decode(json_encode($params)));
 
         if(!is_null($paymentSource)){

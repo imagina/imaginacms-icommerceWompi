@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::table('icommercewompi__payment_sources', function (Blueprint $table) {
            
-            $table->tinyInteger('default')->default(0)->unsigned()->after('user_id');
+            $table->tinyInteger('default')->default(1)->unsigned()->after('user_id');
           
         });
     }

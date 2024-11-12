@@ -27,7 +27,6 @@ class PaymentSources extends CrudModel
  
   protected $fillable = [
     'user_id',
-    'status',
     'default',
     'options'
   ];

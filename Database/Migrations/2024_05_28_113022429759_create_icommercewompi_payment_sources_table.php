@@ -20,7 +20,6 @@ return new class extends Migration
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on(config('auth.table', 'users'))->onDelete('restrict');
 
-            $table->tinyInteger('status')->default(1)->unsigned();
             $table->text('options')->nullable();
 
             // Audit fields
