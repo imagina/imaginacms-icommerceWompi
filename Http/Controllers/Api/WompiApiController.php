@@ -18,7 +18,7 @@ class WompiApiController extends BaseApiController
     private $order;
     private $transaction;
     private $wompiService;
-    private $log = "Icommercewompi: WompiApiController|";
+    private $log = "Icommercewompi: WompiApiController||";
 
     public function __construct(
         OrderRepository $order,
@@ -116,6 +116,28 @@ class WompiApiController extends BaseApiController
         //Request
         $client = new \GuzzleHttp\Client();
         $response = $client->request('GET', $endpoint."/".$paymentSourcesId,[
+            'headers' => [
+                'Authorization' => 'Bearer '.$paymentMethod->options->privateKey
+            ]
+        ]);
+
+        $res = json_decode($response->getBody()->getContents());
+
+        return $res->data;
+    }
+
+    /**
+     * API Wompi | Disable Payment Source | Is in testing | Not all payment sources
+     */
+    public function voidPaymentSource($paymentSourcesId,$paymentMethod)
+    {
+        \Log::info($this->log."voidPaymentSources");
+        
+        $endpoint = $this->wompiService->getApiEnviroment($paymentMethod,"paymentSources");
+
+        //Request
+        $client = new \GuzzleHttp\Client();
+        $response = $client->request('PUT', $endpoint."/".$paymentSourcesId."/void",[
             'headers' => [
                 'Authorization' => 'Bearer '.$paymentMethod->options->privateKey
             ]

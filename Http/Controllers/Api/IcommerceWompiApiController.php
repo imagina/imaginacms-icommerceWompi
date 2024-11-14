@@ -32,7 +32,7 @@ class IcommerceWompiApiController extends BaseApiController
     private $transaction;
     private $transactionController;
     private $wompiService;
-    private $log = "Icommercewompi: ApiController|";
+    private $log = "Icommercewompi: ApiController||";
     private $wompiApi;
     private $paymentSources;
 
