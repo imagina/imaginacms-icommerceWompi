@@ -7,7 +7,7 @@ use Modules\Icommercewompi\Entities\Wompi as WompiEntity;
 class WompiService
 {
 
-    private $log = "Icommercewompi: WompiService|";
+    private $log = "Icommercewompi: WompiService||";
 
 	public function __construct(){
 
@@ -184,6 +184,13 @@ class WompiService
             $finalData["phone"] = $paymentSourceData->public_data->phone_number;
         }
 
+         //Validation DaviPlata
+         if($paymentSourceData->type=="DAVIPLATA"){
+            $finalData["phone"] = $paymentSourceData->public_data->phone_number;
+            $finalData["type_document"] = $paymentSourceData->public_data->type_document;
+            $finalData["number_document"] = $paymentSourceData->public_data->number_document;
+        }
+
         return $finalData;
     }
 
@@ -226,6 +233,11 @@ class WompiService
                         $finalData["last_four"] = $paymentSourceData->public_data->phone_number;
                         $finalData["card_holder"] = "";
                     }
+
+                    if($paymentSourceData->type=="DAVIPLATA"){
+                        $finalData["last_four"] = $paymentSourceData->public_data->phone_number;
+                        $finalData["card_holder"] = "";
+                    }
                    
                     array_push($userPaymentSources,$finalData);
                 }   
@@ -262,6 +274,14 @@ class WompiService
                 }
                 //CASE NEQUI
                 if($paymentSource->options->type=="NEQUI" && $newPaymentSources->public_data->type=="NEQUI"){
+                    //Exist
+                    if($paymentSource->options->phone==$newPaymentSources->public_data->phone){
+                        $psToDelete = $paymentSource;
+                        break;
+                    }
+                }
+                //CASE DAVIPLATA
+                if($paymentSource->options->type=="DAVIPLATA" && $newPaymentSources->public_data->type=="DAVIPLATA"){
                     //Exist
                     if($paymentSource->options->phone==$newPaymentSources->public_data->phone){
                         $psToDelete = $paymentSource;
