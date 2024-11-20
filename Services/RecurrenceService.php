@@ -11,7 +11,7 @@ use Modules\Icommercewompi\Repositories\PaymentSourcesRepository;
 class RecurrenceService
 {   
 
-    private $log = "Icommercewompi: RecurrenceService|";
+    private $log = "Icommercewompi: RecurrenceService||";
     private $wompiApi;
     private $paymentSources;
     private $transactionRepository;
