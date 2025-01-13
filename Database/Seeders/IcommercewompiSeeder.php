@@ -5,6 +5,7 @@ namespace Modules\Icommercewompi\Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Modules\Icommerce\Entities\PaymentMethod;
 
 class IcommercewompiSeeder extends Seeder
 {
@@ -16,7 +17,7 @@ class IcommercewompiSeeder extends Seeder
   public function run()
   {
     $name = config('asgard.icommercewompi.config.paymentName');
-    $paymentMethod = app('Modules\Icommercewompi\Services\WompiService')->getPaymentMethod();
+    $paymentMethod = PaymentMethod::where('name', $name)->first();
     $PaymentMethodRepository = app('Modules\Icommerce\Repositories\PaymentMethodRepository');
 
 
